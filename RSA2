@@ -1,0 +1,73 @@
+#include<iostream>
+#include<conio.h>
+#include<stdio.h>
+#include<string.h>
+#include<ctype.h>
+
+//To repeat the Key till the
+//string size and attain an new key
+char* getkey2(char string[600],char key1[10])
+ { char key2[600];
+   strcpy(key2,key1);
+   int i,x,y,ss,sk;
+    ss=strlen(string);
+    sk=strlen(key1);
+     x=ss/sk;
+     y=ss%sk;
+    for(i=1;i<x;i++)
+     strcat(key2,key1);
+    x=strlen(key2);
+     for(i=0;i<y;i++)
+      { key2[x]=key1[i];
+  x++;
+      }
+   return key2;
+ }
+
+//To Encrypt
+char* encrypt(char string[600], char key2[600])
+ { char em[600];
+    for(int i=0; i<strlen(string); i++)
+     { if(string[i]>=65 && string[i]<=90)
+ { em[i] = ( string[i] + key2[i] ) % 26;
+   em[i]+='A';
+ }
+       else
+  em[i]=string[i];
+     }
+    return em;
+ }
+
+//To Decrypt
+char* decrypt(char string[600],char key2[600])
+ { char dm[600];
+    for(int i=0; i<strlen(string); i++)
+     { if(string[i]>=65 && string[i]<=90)
+  { dm[i] = ( string[i] - key2[i] + 26 ) % 26;
+    dm[i]+='A';
+  }
+ else
+    dm[i]=string[i];
+     }
+  return dm;
+ }
+
+
+int main()
+ {
+   char string[600],key1[10],key2[600],em[600],dm[600];
+     cout<<"Enter Everything in Capital Letters.";
+     cout<<"\nEnter Message to be Encrypted : ";gets(string);
+     cout<<"\nEnter Key for Decryption(less than 10 alphabets)";gets(key1);
+
+
+    strcpy(key2,getkey2(string,key1));
+    strcpy(em,encrypt(string,key2));
+    strcpy(dm,decrypt(em,key2));
+
+
+    cout<<"\nEncrypted Version : "<<em;
+    cout<<"\nDecrypted Version : "<<dm;
+
+    getch();
+    }
