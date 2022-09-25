@@ -1,0 +1,33 @@
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+
+    string crypmsg;
+      cout<<"LE MESSAGE DOIT CONTENIR UNIQUEMENT DES LETTRES"<<endl;
+cout<<"entrer votre message crypter:  ";
+cin>>crypmsg;
+
+         string decryptmsg= crypmsg;
+
+
+        for(int i=0;i<crypmsg.size();i++){
+
+            if(crypmsg[i] == 32) {
+                continue;// 32 est l'espace en ascii
+          } else{
+        if((crypmsg[i] - 3) < 97 && (crypmsg[i] -3) > 90) {
+            int temp = (crypmsg[i] - 3) +26;
+           decryptmsg [i]=temp;
+        }else if (( crypmsg[i] - 3)  < 65 ) {
+                   int temp = (crypmsg[i] -3) + 26;
+                   decryptmsg[i] = temp;
+        }else{
+            decryptmsg[i] = crypmsg[i] - 3;
+            }
+        }
+        }
+        cout<<"LE MESSAGE decrypter est:  "<< decryptmsg << endl;
+}
